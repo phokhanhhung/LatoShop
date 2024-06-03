@@ -1,0 +1,20 @@
+<div class="profile-wrapper">
+  <div class="profile">
+    <img [src]="avatar" alt="avatar" />
+    <div class="profile-details">
+      <div class="profile-detail">
+        <span>Username:</span>
+        <b> {{ name }}</b>
+      </div>
+
+      <div class="profile-detail">
+        <span>Email:</span>
+        <b> {{ email }}</b>
+      </div>
+    </div>
+    <div class="profile-btns">
+      <a href="" (click)="signOut()">Sign out</a>
+      <a href="/product-detail">Go back</a>
+    </div>
+  </div>
+</div>

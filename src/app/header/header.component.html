@@ -1,0 +1,16 @@
+<div class="header">
+  <h2><a href="/">LatoShop</a></h2>
+  @if(isLoggedIn()) {
+  <a href="/profile" class="user-infor-btn">
+    <img [src]="avatar" alt="avatar" />
+    <div class="user-infor">
+      <h5>{{ name }}</h5>
+      <p>{{ email }}</p>
+    </div>
+  </a>
+  } @else {
+  <div class="sign-in-btn">
+    <div id="google-sign-in-btn"></div>
+  </div>
+  }
+</div>
