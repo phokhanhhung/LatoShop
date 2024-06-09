@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #FDE5D4;
 }
 
 .profile-wrapper > .profile {
@@ -14,6 +15,7 @@
   border-radius: 5px;
   border: 1px #ccc solid;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #fff;
 }
 
 .profile-wrapper > .profile > img {

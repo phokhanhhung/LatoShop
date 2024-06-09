@@ -1,4 +1,19 @@
 <div class="login">
-  <img src="assets/images/background-image.jpg" alt="background-image" />
-  <p>Get your new sweater</p>
+  <img src="assets/images/background.jpg" alt="background-image" />
+  <div class="slogan-wrapper">
+    <div class="slogan">
+      Choose <br />
+      your sweater!
+    </div>
+  </div>
+
+  @if(isLoggedIn) {
+  <app-product-detail></app-product-detail>
+
+  <app-discount></app-discount>
+  }
+
+  <app-contact></app-contact>
+
+  <app-footer></app-footer>
 </div>

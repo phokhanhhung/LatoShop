@@ -1,60 +1,71 @@
-declare var google: any;
-
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [LoginFormComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
-  private router = inject(Router);
+export class HeaderComponent {
+  private subscription: Subscription;
+  isLoggedIn: boolean;
+  name: string;
+  email: string;
+  avatar: string;
+  loginForm: HTMLElement;
+  // constructor(, private renderer: Renderer2, private auth: AuthService) {}
+
+  ngAfterViewInit() {
+    this.loginForm = this.elRef.nativeElement.querySelector("#login-form-wrapper");
+  }
+  constructor(private elRef: ElementRef, private auth: AuthService) {}
 
   private isSessionStorageAvailable: boolean = typeof sessionStorage !== 'undefined';
 
-  //Get user information to display on header
-  name = this.isSessionStorageAvailable && JSON.parse(sessionStorage.getItem('userInfo'))?.name;
-  email = this.isSessionStorageAvailable && JSON.parse(sessionStorage.getItem('userInfo'))?.email;
-  avatar = this.isSessionStorageAvailable && JSON.parse(sessionStorage.getItem('userInfo'))?.picture;
+  ngOnInit() {
+    this.subscription = this.auth.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
 
-  ngOnInit(): void {
-    google.accounts.id.initialize({
-      client_id: '837742596297-j894sgkpglq12rqkf1r1v6mp6cv7h8ia.apps.googleusercontent.com',
-      callback: (response: any) => this.handleLogin(response),
-    })
-
-    google.accounts.id.renderButton(document.getElementById("google-sign-in-btn"), {
-      theme: 'filled_black',
-      size: 'medium',
-      shape: 'rectangle',
-      width: 200
-    })
+      if (isLoggedIn) {
+        const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        this.name = userInfo?.name;
+        this.email = userInfo?.email;
+        this.avatar = userInfo?.picture;
+      } else {
+        this.name = null;
+        this.email = null;
+        this.avatar = null;
+      }
+    });
   }
 
-  private decodeToken(token: string) {
-    return JSON.parse(atob(token.split(".")[1]));
+  handleCloseForm(e?: any) {
+    console.log("closes")
+    e.stopPropagation();
+    this.loginForm.classList.remove("display");
   }
 
-  handleLogin(response: any) {
-    //Decode the token
-    const payload = this.decodeToken(response.credential);
-
-    this.name = payload.name;
-    this.email = payload.email;
-    this.avatar = payload.picture;
-
-    //Store user info in session storage
-    sessionStorage.setItem("userInfo", JSON.stringify(payload));
-
-    //Navigate to product detail page
-    this.router.navigate(['product-detail']);
+  handleOpenForm() {
+    console.log("click open")
+    this.loginForm.classList.add("display");
   }
-  
-  //Check if user logged in or not
-  isLoggedIn() {
-    return this.isSessionStorageAvailable && !!JSON.parse(sessionStorage.getItem('userInfo')!) && !!JSON.parse(sessionStorage.getItem('userInfo')!).name;
+
+  handleSignOut() {
+    sessionStorage.removeItem("userInfo")
+    this.auth.signOut();
+    this.auth.updateLoginStatus();
   }
+
+  checkLogIn(isLoggedIn: boolean) {
+    console.log("ckeck", isLoggedIn)
+    if(isLoggedIn) {
+      this.loginForm.classList.remove("display");
+    }
+  }
+
 }

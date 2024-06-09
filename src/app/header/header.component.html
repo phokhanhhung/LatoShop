@@ -1,16 +1,23 @@
 <div class="header">
   <h2><a href="/">LatoShop</a></h2>
-  @if(isLoggedIn()) {
-  <a href="/profile" class="user-infor-btn">
-    <img [src]="avatar" alt="avatar" />
-    <div class="user-infor">
-      <h5>{{ name }}</h5>
+  @if(isLoggedIn) {
+  <div class="user-infor">
+    <a href="/profile" class="user-infor-btn">
+      <img [src]="avatar" alt="avatar" />
+    </a>
+    <div class="user-infor-menu">
+      <p>{{ name }}</p>
       <p>{{ email }}</p>
+      <a href="" (click)="handleSignOut()">Sign out</a>
     </div>
-  </a>
-  } @else {
-  <div class="sign-in-btn">
-    <div id="google-sign-in-btn"></div>
   </div>
+
+  } @else {
+  <div class="sign-in-btn" (click)="handleOpenForm()">Sign in /Sign up</div>
   }
+
+  <div id="login-form-wrapper">
+    <div (click)="handleCloseForm($event)" class="close">X</div>
+    <app-login-form (isLoggedIn)="checkLogIn($event)"></app-login-form>
+  </div>
 </div>
