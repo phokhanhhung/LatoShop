@@ -1,27 +1,34 @@
-# GgLogin
+# LatoShop
+This is a project related to google sign in authentication with Angular version 18.0.2
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
+## Installation
+1. Clone the repository to your local machine: *https://github.com/phokhanhhung/LatoShop.git*
+2. Navigate to the project directory: *cd gg-login*
+3. Install the dependencies using npm or yarn: *npm install* or *yarn install*
 
-## Development server
+## Usage
+1. Start the development server.
+ng serve
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2. Navigate to http://localhost:4200/
 
-## Code scaffolding
+## Contributing
+Contributions to this project are welcome. If you find any issues or want to suggest improvements, please open an issue or submit a pull request on the project's GitHub repository.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## License
+This project is licensed under the MIT License. Feel free to use, modify, and distribute it as per the terms of the license.
 
-## Build
+## Acknowledgments
+This project was built with the help of the following open-source libraries and frameworks:
+- Angular: https://angular.dev/
+- Google API and Services: https://console.cloud.google.com/apis
+- Google Authentication: https://developers.google.com/identity/gsi/web/reference/js-reference
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Contact
+If you have any questions or need further assistance, feel free to contact the project maintainer:
+- Name: Pho Khanh Hung
+- Email: phokhanhhung2409@gmail.com
+- Github: https://github.com/phokhanhhung
 
 ## Further help
-
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
